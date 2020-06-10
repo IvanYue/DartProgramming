@@ -54,7 +54,7 @@ class Point1 {
 class Point2{
   var rho,theta;
   Point2(this.rho,this.theta);
-  x() => rho * cos(theta);
+  x() => rho * cos(theta); /// 隐含 getter 方法
   y() => rho * sin(theta);
   scale(factor) => new Point2(rho * factor, theta);
   operator +(p) => new Point2(x() + p.x(), y() + p.y());
