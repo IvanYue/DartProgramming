@@ -3,7 +3,7 @@ main(List<String> args) {
   
 }
 
-/// mixin
+/// mixin:当我们想要在不共享相同类层次结构的多个类之间共享 行为 时，或者在超类中实现此类 行为 没有意义时，Mixins非常有用。
 /// 有时单继承局限性很大。
 /// 有时需要一个由多个小部件组合而成的符合部件。将这个复合部件看成集合，这个集合有很多公共功能。
 /// 多继承得不偿失，Dart 使用基于mixin的继承。
@@ -46,27 +46,43 @@ class Point {
 }
 
 /// mixin 例子：表达式问题：它使用的实例例子是一个表达式语言
-/// 抽象语法树
+/// 抽象语法树 AST
 ///  Expression -> Expression + Expression | Expression - Expression|Number
 
 class Expression{}
 class Addition extends Expression{
   var operand1,operand2;
+  get eval => operand1.eval + operand2.eval;
 }
 class Subtraction extends Expression{
   var operand1,operand2;
+  get eval => operand1.eval + operand2.eval;
 }
 
 class Number extends Expression{
   int val;
+  get eval => val;
 }
+/// 添加一个功能：转化为字符串
+/// 方法一：当想把这些 表达式转化为字符串时，就需要添加另一个方法到原先的层次结构中
+/// 类似功能的函数有无数个，类就会变的很难维护与使用。
+/// 而且并不是所有想添加新功能的人都可以访问到原始源代码
+/// 方法二：或者把求值器定义为一个AST类外部的一个函数，但这样就必须对传递过来的表达式进行 类型检查
+/// 然后执行相应的操作。这样做烦琐切效率低下，所以一般会使用  访问者模式 来代替。
+/// 这样的代码结构有个双重问题：添加功能简单，但是添加新类型就很难。
 
 
 
+/**
+ * 面向对象：添加类容易，添加功能却是侵入性的。
+ * 函数式风格：添加功能容易，添加类却是侵入性的。
+ * 所以，真正需要的是一种把各个类和功能独立的添加，而没有侵入性。使用mixin就很好的解决了这个问题。
+ */
 
-
-
-
+/* 
+  Dart 支持 基于 mixin 的继承，每个类都引入了一个mixin，它捕获了类本身对类层次结构所做的独特贡献。
+  mixin 使类的代码以模块化方式重用，而不依赖于它的类层次结构中的位置。
+*/
 
 
 

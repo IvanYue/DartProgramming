@@ -42,7 +42,7 @@ class ExtendedPoint extends Point{
   var orgin = Point(0,0);
   // get distanceFromOrgin => distance(orgin, this); // NoSuchMethodError！
 
-  //所以只能写成这样
+  //类方法 永远不能被继承，所以声明一个抽象的类方法就没有意义了。而且语法上也是非法的。
   get distanceFromOrgin => Point.distance(orgin, this);
   ExtendedPoint(this.orgin) : super(0, 0);
 }
